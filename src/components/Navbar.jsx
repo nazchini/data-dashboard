@@ -24,7 +24,7 @@ const Nav = styled.nav`
     }
   }
 
-  @media screen and (min-width: 280px) and (max-width: 900px) {
+  @media screen and (min-width: 280px) and (max-width: 1080px) {
     flex-direction: column;
     .title {
       h1 {

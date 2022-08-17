@@ -41,7 +41,7 @@ const Section = styled.section`
     margin-top: 2rem;
   }
 
-  @media screen and (min-width: 280px) and (max-width: 900px) {
+  @media screen and (min-width: 280px) and (max-width: 1080px) {
     margin-left: 0;
     }
   }
