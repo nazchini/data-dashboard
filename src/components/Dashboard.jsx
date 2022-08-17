@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Navbar from "./Navbar";
+import Linechart from "./LineChart";
 import scrollreveal from "scrollreveal";
 
 export default function Dashboard() {
@@ -24,7 +25,9 @@ export default function Dashboard() {
   return (
     <Section>
       <Navbar />
-      <div className="flex"></div>
+      <div className="flex">
+        <Linechart />
+      </div>
     </Section>
   );
 }
