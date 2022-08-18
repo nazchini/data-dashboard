@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import ChartsContext from "../store/charts-context";
 import { MdSpaceDashboard } from "react-icons/md";
@@ -7,7 +7,6 @@ import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { GiDeathSkull } from "react-icons/gi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-import scrollreveal from "scrollreveal";
 
 export default function Sidebar() {
   const chartsCtx = useContext(ChartsContext);
@@ -15,28 +14,6 @@ export default function Sidebar() {
 
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
-
-  useEffect(() => {
-    const sr = scrollreveal({
-      origin: "left",
-      distance: "80px",
-      duration: 1000,
-      reset: false,
-    });
-
-    sr.reveal(
-      `
-          .brand,
-          .charts>ul>li:nth-of-type(1),
-          .charts>ul>li:nth-of-type(2),
-          .charts>ul>li:nth-of-type(3),
-      `,
-      {
-        opacity: 0,
-        interval: 300,
-      }
-    );
-  }, []);
 
   function updateChartView(chartName) {
     chartsCtx.updateCurrentChart(chartName);
