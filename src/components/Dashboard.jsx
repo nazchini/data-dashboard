@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import Navbar from "./Navbar";
-import Linechart from "./LineChart";
-import Barchart from "./BarChart";
+import Table from "./charts/Table";
+import Linechart from "./charts/LineChart";
+import Barchart from "./charts/BarChart";
 import ChartsContext from "../store/charts-context";
 
 export default function Dashboard() {
@@ -13,6 +14,7 @@ export default function Dashboard() {
       <Section>
         <Navbar />
         <div className="flex">
+          {chartsCtx.currentChart === "table" && <Table />}
           {chartsCtx.currentChart === "line" && <Linechart />}
           {chartsCtx.currentChart === "bar" && <Barchart />}
         </div>
@@ -22,9 +24,9 @@ export default function Dashboard() {
 }
 
 const Section = styled.section`
-  margin-left: 18vw;
   padding: 2rem;
   height: 100%;
+  width: 100%;
   .flex {
     display: flex;
     flex-direction: column;
@@ -33,8 +35,8 @@ const Section = styled.section`
     margin-top: 2rem;
   }
 
-  @media screen and (min-width: 280px) and (max-width: 1080px) {
-    margin-left: 0;
+  @media screen and (min-width: 660px) {
+    
     }
   }
 `;
