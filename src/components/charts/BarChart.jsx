@@ -9,8 +9,8 @@ import {
   YAxis,
   CartesianGrid,
 } from "recharts";
+const data = require("../../assets/titanic.json");
 
-const data = require("../assets/titanic.json");
 const firstClass = {
   Pclass: "First class",
   Survived: 0,
@@ -47,10 +47,12 @@ const survivorsByClass = [firstClass, secondClass, thirdClass];
 export default function Barchart() {
   return (
     <Section>
-      <ResponsiveContainer width="90%" aspect={1}>
+      <h1>Survival vs. Class</h1>
+      <p>The total number of survivals per passenger class</p>
+      <ResponsiveContainer width="70%" aspect={2}>
         <BarChart
           data={survivorsByClass}
-          margin={{ top: 20, left: 20, right: 20, bottom: 50 }}
+          margin={{ top: 60, left: 400, right: 0, bottom: 50 }}
         >
           <CartesianGrid />
           <XAxis dataKey="Pclass" />
@@ -68,6 +70,10 @@ export default function Barchart() {
 const Section = styled.section`
   text-align: center;
   border-radius: 1rem;
+  p {
+    width: 70%;
+    margin: 1em auto;
+  }
   -webkit-box-shadow: 0px 0px 10px 10px rgba(208, 208, 208, 0.5);
   box-shadow: 0px 0px 10px 10px rgba(208, 208, 208, 0.5);
   padding: 2rem 0 0 0;
