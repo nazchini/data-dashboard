@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import Navbar from "./Navbar";
-import Table from "./charts/Table";
-import Linechart from "./charts/LineChart";
-import Barchart from "./charts/BarChart";
-import ChartsContext from "../store/charts-context";
+import Navbar from "./Greeting";
+import Table from "../charts/Table";
+import Linechart from "../charts/LineChart";
+import Barchart from "../charts/BarChart";
+import ChartsContext from "../../store/charts-context";
 
 export default function Dashboard() {
   const chartsCtx = useContext(ChartsContext);

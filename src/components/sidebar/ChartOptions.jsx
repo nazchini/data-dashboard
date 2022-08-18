@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import ChartsContext from "../store/charts-context";
-import { Button } from "./styles/Button.styled";
-import { ChartOptionsStyles } from "./styles/ChartOptions.styled";
+import ChartsContext from "../../store/charts-context";
+import { Button } from "../styles/Button.styled";
+import { ChartOptionsStyles } from "../styles/ChartOptions.styled";
 
 import { MdSpaceDashboard } from "react-icons/md";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
