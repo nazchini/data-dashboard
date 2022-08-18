@@ -9,7 +9,7 @@ import {
   YAxis,
   CartesianGrid,
 } from "recharts";
-const data = require("../../assets/titanic.json");
+const data = require("../../../assets/titanic.json");
 
 const firstClass = {
   Pclass: "First class",

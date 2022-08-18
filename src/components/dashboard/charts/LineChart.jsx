@@ -10,7 +10,7 @@ import {
   CartesianGrid,
 } from "recharts";
 
-const data = require("../../assets/titanic.json");
+const data = require("../../../assets/titanic.json");
 const ageSorted = data.sort((a, b) => a.Age - b.Age);
 
 export default function Linechart() {

@@ -1,7 +1,7 @@
 import React from "react";
 import TableRow from "./TableRow";
-import { TableStyles } from "../styles/Table.styled";
-import data from "../../assets/titanic.json";
+import { TableStyles } from "../../styles/Table.styled";
+import data from "../../../assets/titanic.json";
 
 export default function Table() {
   return (
