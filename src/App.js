@@ -13,5 +13,10 @@ export default function App() {
 }
 
 const Div = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 765px) {
+    flex-direction: row;
+  }
 `;
