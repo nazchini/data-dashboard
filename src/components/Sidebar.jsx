@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
+import ChartsContext from "../store/charts-context";
 import { MdSpaceDashboard } from "react-icons/md";
 import { FaShip } from "react-icons/fa";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
@@ -9,7 +10,7 @@ import { VscChromeClose } from "react-icons/vsc";
 import scrollreveal from "scrollreveal";
 
 export default function Sidebar() {
-  const [currentLink, setCurrentLink] = useState(1);
+  const chartsCtx = useContext(ChartsContext);
   const [navbarState, setNavbarState] = useState(false);
 
   const html = document.querySelector("html");
@@ -26,9 +27,9 @@ export default function Sidebar() {
     sr.reveal(
       `
           .brand,
-          .links>ul>li:nth-of-type(1),
-          .links>ul>li:nth-of-type(2),
-          .links>ul>li:nth-of-type(3),
+          .charts>ul>li:nth-of-type(1),
+          .charts>ul>li:nth-of-type(2),
+          .charts>ul>li:nth-of-type(3),
       `,
       {
         opacity: 0,
@@ -37,7 +38,10 @@ export default function Sidebar() {
     );
   }, []);
 
-  function updateChartView() {}
+  function updateChartView(chartName) {
+    chartsCtx.updateCurrentChart(chartName);
+    console.log({ chartName });
+  }
 
   return (
     <>
@@ -62,28 +66,29 @@ export default function Sidebar() {
           <div className="charts">
             <ul>
               <li
-                className={currentLink === 1 ? "active" : "none"}
-                onClick={() => setCurrentLink(1)}
+                className={
+                  chartsCtx.currentChart === "table" ? "active" : "none"
+                }
               >
-                <button onClick={updateChartView}>
+                <button onClick={() => updateChartView("table")}>
                   <MdSpaceDashboard />
                   <span> Raw Data</span>
                 </button>
               </li>
               <li
-                className={currentLink === 2 ? "active" : "none"}
-                onClick={() => setCurrentLink(2)}
+                className={
+                  chartsCtx.currentChart === "line" ? "active" : "none"
+                }
               >
-                <button onClick={updateChartView}>
+                <button onClick={() => updateChartView("line")}>
                   <FaRegMoneyBillAlt />
                   <span> Age vs. Fare</span>
                 </button>
               </li>
               <li
-                className={currentLink === 3 ? "active" : "none"}
-                onClick={() => setCurrentLink(3)}
+                className={chartsCtx.currentChart === "bar" ? "active" : "none"}
               >
-                <button onClick={updateChartView}>
+                <button onClick={() => updateChartView("bar")}>
                   <GiDeathSkull />
                   <span> Survival vs. Class</span>
                 </button>
@@ -96,32 +101,23 @@ export default function Sidebar() {
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
         <div className="responsive__links">
           <ul>
-            <li
-              className={currentLink === 1 ? "active" : "none"}
-              onClick={() => setCurrentLink(1)}
-            >
-              <button onClick={updateChartView}>
+            <li className={chartsCtx.currentChart === 1 ? "active" : "none"}>
+              <button onClick={() => updateChartView("table")}>
                 <MdSpaceDashboard />
                 <span> Raw Data</span>
               </button>
             </li>
-            <li
-              className={currentLink === 2 ? "active" : "none"}
-              onClick={() => setCurrentLink(2)}
-            >
-              <button onClick={updateChartView}>
+            <li className={chartsCtx.currentChart === 2 ? "active" : "none"}>
+              <button onClick={() => updateChartView("line")}>
                 <FaRegMoneyBillAlt />
                 <span> Age vs. Fare</span>
               </button>
             </li>
-            <li
-              className={currentLink === 3 ? "active" : "none"}
-              onClick={() => setCurrentLink(3)}
-            >
-              <a href="#">
+            <li className={chartsCtx.currentChart === 3 ? "active" : "none"}>
+              <button onClick={() => updateChartView("bar")}>
                 <GiDeathSkull />
                 <span> Survival vs. Class</span>
-              </a>
+              </button>
             </li>
           </ul>
         </div>
@@ -183,6 +179,7 @@ const Section = styled.section`
             }
           }
           button {
+            cursor: pointer;
             background: none;
             border: none;
             display: flex;

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
 import Navbar from "./Navbar";
 import Linechart from "./LineChart";
 import Barchart from "./BarChart";
+import ChartsContext from "../store/charts-context";
 import scrollreveal from "scrollreveal";
 
 export default function Dashboard() {
@@ -24,13 +25,15 @@ export default function Dashboard() {
     );
   }, []);
 
+  const chartsCtx = useContext(ChartsContext);
+
   return (
     <>
       <Section>
         <Navbar />
         <div className="flex">
-          <Linechart />
-          <Barchart />
+          {chartsCtx.currentChart === "line" && <Linechart />}
+          {chartsCtx.currentChart === "bar" && <Barchart />}
         </div>
       </Section>
     </>
