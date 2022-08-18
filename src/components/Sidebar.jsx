@@ -11,6 +11,7 @@ import scrollreveal from "scrollreveal";
 export default function Sidebar() {
   const [currentLink, setCurrentLink] = useState(1);
   const [navbarState, setNavbarState] = useState(false);
+
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
 
@@ -36,6 +37,8 @@ export default function Sidebar() {
     );
   }, []);
 
+  function updateChartView() {}
+
   return (
     <>
       <Section>
@@ -56,34 +59,34 @@ export default function Sidebar() {
               />
             )}
           </div>
-          <div className="links">
+          <div className="charts">
             <ul>
               <li
                 className={currentLink === 1 ? "active" : "none"}
                 onClick={() => setCurrentLink(1)}
               >
-                <a href="#">
+                <button onClick={updateChartView}>
                   <MdSpaceDashboard />
                   <span> Raw Data</span>
-                </a>
+                </button>
               </li>
               <li
                 className={currentLink === 2 ? "active" : "none"}
                 onClick={() => setCurrentLink(2)}
               >
-                <a href="#">
+                <button onClick={updateChartView}>
                   <FaRegMoneyBillAlt />
                   <span> Age vs. Fare</span>
-                </a>
+                </button>
               </li>
               <li
                 className={currentLink === 3 ? "active" : "none"}
                 onClick={() => setCurrentLink(3)}
               >
-                <a href="#">
+                <button onClick={updateChartView}>
                   <GiDeathSkull />
                   <span> Survival vs. Class</span>
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -97,19 +100,19 @@ export default function Sidebar() {
               className={currentLink === 1 ? "active" : "none"}
               onClick={() => setCurrentLink(1)}
             >
-              <a href="#">
+              <button onClick={updateChartView}>
                 <MdSpaceDashboard />
                 <span> Raw Data</span>
-              </a>
+              </button>
             </li>
             <li
               className={currentLink === 2 ? "active" : "none"}
               onClick={() => setCurrentLink(2)}
             >
-              <a href="#">
+              <button onClick={updateChartView}>
                 <FaRegMoneyBillAlt />
                 <span> Age vs. Fare</span>
-              </a>
+              </button>
             </li>
             <li
               className={currentLink === 3 ? "active" : "none"}
@@ -129,7 +132,6 @@ export default function Sidebar() {
 const Section = styled.section`
   position: fixed;
   left: 0;
-  //   background-color: #ddd;
   box-shadow: 0.2em 0 2em 0 #c8c8c8;
   height: 100vh;
   width: 18vw;
@@ -163,7 +165,7 @@ const Section = styled.section`
         color: #4c8bf5;
       }
     }
-    .links {
+    .charts {
       display: flex;
       justify-content: center;
       ul {
@@ -176,20 +178,21 @@ const Section = styled.section`
           border-radius: 0.6rem;
           &:hover {
             background-color: #4c8bf5;
-            a {
+            button {
               color: #fff;
             }
           }
-          a {
-            text-decoration: none;
+          button {
+            background: none;
+            border: none;
             display: flex;
             gap: 1rem;
-            color: #000;
+            font-size: 1em;
           }
         }
         .active {
           background-color: #4c8bf5;
-          a {
+          button {
             color: #fff;
           }
         }
