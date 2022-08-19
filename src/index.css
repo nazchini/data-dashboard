@@ -9,11 +9,5 @@
 body {
   font-family: "Montserrat", sans-serif;
   color: #000;
-  height: 100%;
-}
-
-.show {
-  opacity: 1 !important;
-  visibility: visible !important;
-  right: 0 !important;
+  height: 100vh;
 }
