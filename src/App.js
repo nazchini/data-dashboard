@@ -16,7 +16,7 @@ const Div = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 765px) {
+  @media screen and (min-width: 800px) {
     flex-direction: row;
   }
 `;

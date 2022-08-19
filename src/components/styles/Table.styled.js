@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const TableStyles = styled.table`
   border-collapse: collapse;
   width: 100%;
+  font-size: 0.6rem;
   th,
   td {
     border: 1px solid #ffffff;
     text-align: left;
-    padding: 8px;
-    /* font-size: 32px; */
+    padding: 3px;
   }
 
   th {
@@ -17,5 +17,12 @@ export const TableStyles = styled.table`
 
   td {
     background-color: rgb(205, 235, 253);
+  }
+
+  @media screen and (min-width: 660px) {
+    font-size: 1rem;
+    td {
+      padding: 8px;
+    }
   }
 `;

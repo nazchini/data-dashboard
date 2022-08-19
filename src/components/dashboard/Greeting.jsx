@@ -1,39 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Navbar() {
+export default function Greeting() {
   return (
-    <Nav>
+    <Section>
       <div className="title">
-        <h4>Hello George,</h4>
-        <h1>
+        <h1>Hello George,</h1>
+        <h2>
           Welcome to <span>YOUR DASHBOARD</span>
-        </h1>
+        </h2>
       </div>
-    </Nav>
+    </Section>
   );
 }
-const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
+const Section = styled.section`
   .title {
     h1 {
+      font-size: 0.8rem;
+    }
+    h2 {
+      font-size: 1rem;
       span {
         color: #4c8bf5;
       }
     }
   }
-
-  @media screen and (min-width: 280px) and (max-width: 1080px) {
-    flex-direction: column;
+  @media screen and (min-width: 660px) {
     .title {
       h1 {
-        span {
-          display: block;
-
-          margin: 1rem 0;
-          /* letter-spacing: 0; */
-        }
+        font-size: 1.2rem;
+      }
+      h2 {
+        font-size: 1.5rem;
       }
     }
   }

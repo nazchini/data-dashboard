@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   LineChart,
@@ -12,8 +13,24 @@ import {
 
 const data = require("../../../assets/titanic.json");
 const ageSorted = data.sort((a, b) => a.Age - b.Age);
+const sortedByAge = ageSorted.filter((item) => parseInt(item.Age) > 0);
+const passengers = [
+  ...new Map(sortedByAge.map((item) => [item["Age"], item])).values(),
+];
 
 export default function Linechart() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1200);
+  useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => {
+        const ismobile = window.innerWidth < 1200;
+        if (ismobile !== isMobile) setIsMobile(ismobile);
+      },
+      false
+    );
+  }, [isMobile]);
+
   return (
     <Section>
       <h1>Age vs. Fare</h1>
@@ -21,13 +38,12 @@ export default function Linechart() {
         A line chart that shows the relationship between the age of the
         passengers aboard Titanic and the fare they paid
       </p>
-      <ResponsiveContainer width="90%" aspect={3}>
-        <LineChart
-          width={500}
-          height={300}
-          data={ageSorted}
-          margin={{ top: 20, left: 50, right: 20, bottom: 50 }}
-        >
+      <ResponsiveContainer
+        className="chart"
+        width="90%"
+        aspect={`${isMobile ? 1 : 3}`}
+      >
+        <LineChart width={500} height={300} data={passengers}>
           <CartesianGrid
             horizontal="true"
             vertical=""
@@ -68,5 +84,27 @@ const Section = styled.section`
   -webkit-box-shadow: 0px 0px 10px 10px rgba(208, 208, 208, 0.5);
   box-shadow: 0px 0px 10px 10px rgba(208, 208, 208, 0.5);
   padding: 2rem 0 0 0;
+  }
+
+  .chart {
+    margin: 0 auto;
+    padding-bottom: 1em;
+  }
+   h1 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.625rem;
+    }
+
+  @media screen and (min-width: 660px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
   }
 `;

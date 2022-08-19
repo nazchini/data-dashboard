@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   BarChart,
@@ -13,53 +14,63 @@ const data = require("../../../assets/titanic.json");
 
 const firstClass = {
   Pclass: "First class",
-  Survived: 0,
-  "Did not survive": 0,
+  Survived: data.filter(
+    (person) => person.Pclass === 1 && person.Survived === 1
+  ).length,
+  "Did not survive": data.filter(
+    (person) => person.Pclass === 1 && person.Survived === 0
+  ).length,
 };
+
 const secondClass = {
   Pclass: "Second class",
-  Survived: 0,
-  "Did not survive": 0,
+  Survived: data.filter(
+    (person) => person.Pclass === 2 && person.Survived === 1
+  ).length,
+  "Did not survive": data.filter(
+    (person) => person.Pclass === 2 && person.Survived === 0
+  ).length,
 };
 const thirdClass = {
   Pclass: "Third class",
-  Survived: 0,
-  "Did not survive": 0,
+  Survived: data.filter(
+    (person) => person.Pclass === 3 && person.Survived === 1
+  ).length,
+  "Did not survive": data.filter(
+    (person) => person.Pclass === 3 && person.Survived === 0
+  ).length,
 };
-
-for (let person of data) {
-  if (person.Pclass === 1) {
-    person.Survived === 1
-      ? (firstClass.Survived += 1)
-      : (firstClass["Did not survive"] += 1);
-  } else if (person.Pclass === 2) {
-    person.Survived === 1
-      ? (secondClass.Survived += 1)
-      : (secondClass["Did not survive"] += 1);
-  } else {
-    person.Survived === 1
-      ? (thirdClass.Survived += 1)
-      : (thirdClass["Did not survive"] += 1);
-  }
-}
 const survivorsByClass = [firstClass, secondClass, thirdClass];
 
 export default function Barchart() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1200);
+  useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => {
+        const ismobile = window.innerWidth < 1200;
+        if (ismobile !== isMobile) setIsMobile(ismobile);
+      },
+      false
+    );
+  }, [isMobile]);
+
   return (
     <Section>
       <h1>Survival vs. Class</h1>
       <p>The total number of survivals per passenger class</p>
-      <ResponsiveContainer width="70%" aspect={2}>
-        <BarChart
-          data={survivorsByClass}
-          margin={{ top: 60, left: 400, right: 0, bottom: 50 }}
-        >
+      <ResponsiveContainer
+        className="chart"
+        width="70%"
+        aspect={`${isMobile ? 0.8 : 2}`}
+      >
+        <BarChart data={survivorsByClass}>
           <CartesianGrid />
           <XAxis dataKey="Pclass" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="Survived" stackId="a" fill="  #4c8bf5" />
+          <Bar dataKey="Survived" stackId="a" fill="#4c8bf5" />
           <Bar dataKey="Did not survive" stackId="a" fill="#c4342d" />
         </BarChart>
       </ResponsiveContainer>
@@ -73,9 +84,30 @@ const Section = styled.section`
   p {
     width: 70%;
     margin: 1em auto;
+    font-size: 0.625rem;
   }
+
+   h1 {
+      font-size: 1rem;
+    }
+
+  .chart {
+    margin: 0 auto;
+    padding-bottom: 1em;
+  }
+
   -webkit-box-shadow: 0px 0px 10px 10px rgba(208, 208, 208, 0.5);
   box-shadow: 0px 0px 10px 10px rgba(208, 208, 208, 0.5);
   padding: 2rem 0 0 0;
+  }
+
+  @media screen and (min-width: 660px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
   }
 `;
