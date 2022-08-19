@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import Navbar from "./Greeting";
-import Table from "../charts/Table";
-import Linechart from "../charts/LineChart";
-import Barchart from "../charts/BarChart";
+import Table from "./charts/Table";
+import Linechart from "./charts/LineChart";
+import Barchart from "./charts/BarChart";
 import ChartsContext from "../../store/charts-context";
 
 export default function Dashboard() {
@@ -34,9 +34,5 @@ const Section = styled.section`
     gap: 1rem;
     margin-top: 2rem;
   }
-
-  @media screen and (min-width: 660px) {
-    
-    }
   }
 `;
